@@ -1,9 +1,19 @@
+import { useState } from 'react'
 import { recetas } from './data/recetas'
-import RecetaCard from './components/RecetaCard'
 import { ListasRecetas } from './components/ListasRecetas'
+import { FiltroCategoria } from './components/LiltroCategoria'
 import './App.css'
 
 function App() {
+  const [filtroCategoria, setFiltroCategoria] = useState('Todas')
+  const [busqueda, setBusqueda] = useState('')
+
+  const recetasFiltradas = recetas.filter((receta) => {
+    const categoriaValida = filtroCategoria === 'Todas' || receta.categoria === filtroCategoria
+    const nombreValido = receta.nombre.toLowerCase().includes(busqueda.trim().toLowerCase())
+    return categoriaValida && nombreValido
+  })
+
   return (
     <main style={{ padding: '24px', display: 'grid', gap: '24px' }}>
       <header>
@@ -13,7 +23,20 @@ function App() {
         </p>
       </header>
 
-      <ListasRecetas recetas={recetas} />
+      <FiltroCategoria
+        filtroCategoria={filtroCategoria}
+        setFiltroCategoria={setFiltroCategoria}
+        busqueda={busqueda}
+        setBusqueda={setBusqueda}
+      />
+
+      {recetasFiltradas.length > 0 ? (
+        <ListasRecetas recetas={recetasFiltradas} />
+      ) : (
+        <p style={{ color: '#475569', fontSize: '1rem' }}>
+          No hay recetas que coincidan.
+        </p>
+      )}
     </main>
   )
 }

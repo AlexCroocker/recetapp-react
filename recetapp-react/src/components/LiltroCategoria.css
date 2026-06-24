@@ -1,0 +1,36 @@
+.filtro-categoria {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-end;
+  padding: 12px 0;
+}
+
+.filtro-categoria__campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 200px;
+  flex: 1;
+}
+
+.filtro-categoria label {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.filtro-categoria select,
+.filtro-categoria input {
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  color: #0f172a;
+  background: #f8fafc;
+}
+
+.filtro-categoria select:focus,
+.filtro-categoria input:focus {
+  outline: 2px solid #93c5fd;
+  outline-offset: 2px;
+}
