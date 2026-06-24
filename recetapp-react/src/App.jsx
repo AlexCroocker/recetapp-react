@@ -30,6 +30,10 @@ function App() {
         setBusqueda={setBusqueda}
       />
 
+      <div style={{ color: '#0f172a', fontWeight: 700 }}>
+        Recetas vegetarianas: {recetasFiltradas.filter((receta) => receta.esVegetariana).length}
+      </div>
+
       {recetasFiltradas.length > 0 ? (
         <ListasRecetas recetas={recetasFiltradas} />
       ) : (

@@ -6,11 +6,12 @@ const categoryClass = {
   Postre: "categoria-postre",
 };
 
-export function RecetaCard({ nombre, origen, porciones, categoria, descripcion, ingredientes }) {
+export function RecetaCard({ nombre, origen, porciones, categoria, descripcion, ingredientes, esVegetariana }) {
   const badgeClass = categoryClass[categoria] ?? "categoria-entrada";
+  const vegetarianClass = esVegetariana ? "receta-card--vegetariana" : "";
 
   return (
-    <article className="receta-card">
+    <article className={`receta-card ${vegetarianClass}`}>
       <div className="receta-card__header">
         <div>
           <h2 className="receta-card__titulo">{nombre}</h2>
@@ -18,7 +19,10 @@ export function RecetaCard({ nombre, origen, porciones, categoria, descripcion, 
             {origen} · {porciones} porciones
           </p>
         </div>
-        <span className={`receta-card__badge ${badgeClass}`}>{categoria}</span>
+        <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+          {esVegetariana && <span className="receta-card__veg-badge">VEG</span>}
+          <span className={`receta-card__badge ${badgeClass}`}>{categoria}</span>
+        </div>
       </div>
 
       <p className="receta-card__descripcion">{descripcion}</p>
@@ -37,3 +41,4 @@ export function RecetaCard({ nombre, origen, porciones, categoria, descripcion, 
   );
 }
 
+export default RecetaCard
